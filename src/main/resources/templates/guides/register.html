@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        table{border: 1px solid black;}
+        table tr{border: 1px solid black;}
+        table tr td{border: 1px solid black;}
+    </style>
+</head>
+<body>
+    <h1>Register</h1>
+    <a id="home" href="#">홈으로</a>
+ 
+    <table>
+        <tr>
+            <td>장소명</td>
+            <td><input id="title" type="text"></td>
+        </tr>
+        <tr>
+            <td>설명</td>
+            <td><input type="text" id="text"></td>
+        </tr>
+        <tr>
+            <td>리뷰수</td>
+            <td><input id="review" type="text"></td>
+        </tr>
+        <tr>
+            <td>평점</td>
+            <td><input id="rating" type="text"></td>
+        </tr>
+        <tr> 
+            <td colspan="2"><button id="register-btn">등록</button></td>
+        </tr>
+    </table>
+    <script>
+        $('#home').click(e => {location.href = '/'})
+        $('#register-btn').click(e => {
+            e.preventDefault()
+            alert(`등록버튼 클릭`)
+            $.ajax({
+            url: '/guides',
+            type: 'POST',
+            data: JSON.stringify({
+                title: $('#title').val(),
+                review: $('#review').val(),
+                rating: $('#rating').val(),
+                text: $('#text').val()
+            }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: d => {},
+            error: e => {`${e}`}
+        })
+        })
+    </script>
+</body>
+</html>
